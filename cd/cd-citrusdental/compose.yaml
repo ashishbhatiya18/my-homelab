@@ -23,8 +23,10 @@ services:
     env_file: .env
     extra_hosts:
       - pg.ab18.in=10.10.10.11
-    volumes:
-      - /home/dietpi/localstack/config/citrusdental-bfe/google_token.json:/app/google_token.json
+    secrets: 
+      - google_token
+    environment:
+      - GOOGLE_TOKEN_FILE=/run/secrets/google_token
     labels:
       - traefik.enable=true
       - traefik.http.routers.bfe.rule=Host(`api.citrusdental.in`)
@@ -39,3 +41,5 @@ networks:
 secrets:
   cloudflare_tunnel_token:
     file: /home/dietpi/localstack/secrets/cloudflare_tunnel_token
+  google_token:
+    file: /home/dietpi/localstack/secrets/google_token.json
