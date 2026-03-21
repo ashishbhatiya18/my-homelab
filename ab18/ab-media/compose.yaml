@@ -1,0 +1,30 @@
+services:
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin
+    networks:
+      - network-layer
+    restart: always
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.jelly.rule=Host(`jelly.ab18.in`)
+      - traefik.http.services.jelly.loadbalancer.server.port=8096
+      - homepage.group=Local Utilities
+      - homepage.name=JellyFin
+      - homepage.icon=https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/jellyfin.png
+      - homepage.href=https://jelly.ab18.in
+      - homepage.description=Media Server
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Kolkata
+      - UMASK_SET=022
+    volumes:
+      - /home/dietpi/movies:/data/movies:ro
+      - /home/dietpi/music:/data/music:ro
+      - /home/dietpi/localstack/data/jellyfin_data/config:/config
+      - /home/dietpi/localstack/data/jellyfin_data/cache:/cache
+networks:
+  network-layer:
+    name: tailscale_bridge
+    external: true
