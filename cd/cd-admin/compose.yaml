@@ -8,6 +8,10 @@ services:
     env_file: .env
     networks:
       - tailscale_bridge
+    environment:
+      - EMAIL_TOKEN_FILE=/app/secrets/email_token.json
+    volumes:
+      - /home/dietpi/localstack/secrets/email_token.json:/app/secrets/email_token.json
     labels:
       - traefik.enable=true
       - traefik.http.routers.admin.rule=Host(`admin.citrusdental.in`)
