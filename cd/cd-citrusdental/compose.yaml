@@ -26,7 +26,9 @@ services:
     secrets: 
       - google_token
     environment:
-      - GOOGLE_TOKEN_FILE=/run/secrets/google_token
+      - GOOGLE_TOKEN_FILE=/app/secrets/google_token.json
+    volumes:
+      - /home/dietpi/localstack/secrets/google_token.json:/app/secrets/google_token.json
     labels:
       - traefik.enable=true
       - traefik.http.routers.bfe.rule=Host(`api.citrusdental.in`)
@@ -41,5 +43,3 @@ networks:
 secrets:
   cloudflare_tunnel_token:
     file: /home/dietpi/localstack/secrets/cloudflare_tunnel_token
-  google_token:
-    file: /home/dietpi/localstack/secrets/google_token.json
