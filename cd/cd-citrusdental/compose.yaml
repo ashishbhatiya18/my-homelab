@@ -23,8 +23,6 @@ services:
     env_file: .env
     extra_hosts:
       - pg.ab18.in=10.10.10.11
-    secrets: 
-      - google_token
     environment:
       - GOOGLE_TOKEN_FILE=/app/secrets/google_token.json
     volumes:
