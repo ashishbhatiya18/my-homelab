@@ -11,7 +11,7 @@ services:
       - TZ=Asia/Kolkata
       - DATABASE_URL=postgresql://ab18:ab18@pg.ab18.in:443/ab18
     extra_hosts:
-      - pg.ab18.in: 10.10.10.11
+      - pg.ab18.in=10.10.10.11
     labels:
       - traefik.enable=true
       - traefik.http.routers.vault.rule=Host(`vault.ab18.in`)
