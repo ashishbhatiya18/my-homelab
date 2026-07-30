@@ -1,0 +1,31 @@
+services:
+  api:
+    image: ghcr.io/ashishbhatiya18/shiftly-backend:main
+    container_name: shiftly-be
+    platform: linux/amd64
+    restart: always
+    env_file:
+      - /home/dietpi/localstack/secrets/shiftly/env
+    networks:
+      - internal_bridge
+    extra_hosts:
+      - "pg.ab18.in:10.10.10.11"
+  cloudflared:
+    command: tunnel --no-autoupdate run
+    image: cloudflare/cloudflared:latest
+    container_name: shiftly-cloudflare
+    restart: always
+    networks:
+      - internal_bridge
+    environment:
+      - TUNNEL_TOKEN_FILE=/run/secrets/cloudflare_tunnel_token
+    secrets:
+      - cloudflare_tunnel_token
+
+networks:
+  internal_bridge:
+    external: true
+
+secrets:
+  cloudflare_tunnel_token:
+    file: /home/dietpi/localstack/secrets/shiftly_cloudflare_tunnel_token
