@@ -8,6 +8,7 @@ services:
       - /home/dietpi/localstack/secrets/shiftly/env
     networks:
       - internal_bridge
+      - native
     extra_hosts:
       - "pg.ab18.in:10.10.10.11"
   cloudflared:
@@ -17,12 +18,14 @@ services:
     restart: always
     networks:
       - internal_bridge
+      - native
     environment:
       - TUNNEL_TOKEN_FILE=/run/secrets/cloudflare_tunnel_token
     secrets:
       - cloudflare_tunnel_token
 
 networks:
+  native: {}
   internal_bridge:
     external: true
 
