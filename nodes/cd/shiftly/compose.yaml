@@ -2,7 +2,6 @@ services:
   api:
     image: ghcr.io/ashishbhatiya18/shiftly-backend:main
     container_name: shiftly-be
-    platform: linux/amd64
     restart: always
     env_file:
       - /home/dietpi/localstack/secrets/shiftly/env
