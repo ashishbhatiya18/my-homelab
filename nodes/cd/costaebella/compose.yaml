@@ -1,10 +1,10 @@
 services:
   api:
-    image: ghcr.io/ashishbhatiya18/shiftly-backend:main
-    container_name: shiftly-be
+    image: ghcr.io/ashishbhatiya18/costaebella-backend:main
+    container_name: costaebella-be
     restart: always
     env_file:
-      - /home/dietpi/localstack/secrets/shiftly/env
+      - /home/dietpi/localstack/secrets/costaebella/env
     networks:
       - internal_bridge
       - native
@@ -13,7 +13,7 @@ services:
   cloudflared:
     command: tunnel --no-autoupdate run
     image: cloudflare/cloudflared:latest
-    container_name: shiftly-cloudflare
+    container_name: costaebella-cloudflare
     restart: always
     networks:
       - internal_bridge
@@ -30,4 +30,4 @@ networks:
 
 secrets:
   cloudflare_tunnel_token:
-    file: /home/dietpi/localstack/secrets/shiftly_cloudflare_tunnel_token
+    file: /home/dietpi/localstack/secrets/costaebella_cloudflare_tunnel_token
