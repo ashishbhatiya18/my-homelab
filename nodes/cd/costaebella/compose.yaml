@@ -1,6 +1,6 @@
 services:
   api:
-    image: ghcr.io/ashishbhatiya18/costaebella-backend:main
+    image: ghcr.io/ashishbhatiya18/costaebella-backend:latest
     container_name: costaebella-be
     restart: always
     env_file:
