@@ -1,0 +1,21 @@
+services:
+  api:
+    image: ghcr.io/ashishbhatiya18/smile-design-backend:latest
+    container_name: smiledesign-be
+    platform: linux/arm64
+    restart: always
+    env_file:
+      - /home/dietpi/localstack/secrets/smiledesign/env
+    networks:
+      - internal_bridge
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.smiledesign-be.rule=Host(`smiledesign-be.citrusdental.in`)
+      - traefik.http.routers.smiledesign-be.middlewares=smiledesign-be-ratelimit
+      - traefik.http.middlewares.smiledesign-be-ratelimit.ratelimit.average=60
+      - traefik.http.middlewares.smiledesign-be-ratelimit.ratelimit.burst=20
+      - traefik.http.middlewares.smiledesign-be-ratelimit.ratelimit.period=1m
+
+networks:
+  internal_bridge:
+    external: true
